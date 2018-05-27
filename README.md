@@ -16,5 +16,4 @@ Use the bot to make polls on your Discord-Server!
 * easy yes-no voting command
 * added role based access control. if author.top_role.name is not in "permitted_roles", the vote will not be created. The list of role names should be comma separated
 
-### [Invite the bot!](https://discordapp.com/oauth2/authorize?client_id=353537045320433664&scope=bot&permissions=27712)
 When it's invited type *.help* to get an overview about the commands.  
