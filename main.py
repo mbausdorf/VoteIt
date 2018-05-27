@@ -8,15 +8,15 @@ async def on_ready():
     print("Logged in as:")
     print(client.user.name)
     print("=============")
-
+    roles = get_config('permitted_roles').split(",")
+    for role in roles:
+        print(role)
+    
     all_votes = sqlib.votes.get_all()
     pending_votes = list(filter(lambda v: v[2] > 0, all_votes))
 
     for vote in pending_votes:
         client.loop.create_task(timer(client, vote[0]))
-
-    post_to_apis(client)
-
 
 @client.event
 @handle_commands(client)
@@ -268,16 +268,6 @@ async def on_reaction_add(reaction, user):
 @client.event
 async def on_reaction_remove(reaction, user):
     await update_votes(reaction, user)
-
-
-@client.event
-async def on_server_join(server):
-    post_to_apis(client)
-
-
-@client.event
-async def on_server_remove(server):
-    post_to_apis(client)
 
 
 async def uptime_count():

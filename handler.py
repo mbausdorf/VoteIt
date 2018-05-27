@@ -233,9 +233,14 @@ def handle_commands(client):
             if message.content.lower().startswith(all_aliases):  # checks if message is a command
                 await client.send_typing(message.channel)
 
+                roles = get_config("permitted_roles").split(",")
+                			
+                if message.author.top_role.name not in roles:
+                    return None
+
                 if alias_in(message.content, 'help', prefix=prefix):
                     content = get_cmd_content(message.content)
-
+                    
                     if content.lower() in get_all_aliases(prefix):
                         help_embed = get_help_embed(content.lower(), prefix)
 
